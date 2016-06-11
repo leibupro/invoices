@@ -42,7 +42,7 @@ The tree appears as follows:
 ## Remarks 
 * Be careful by using the clean target. It removes all the invoice PDF files.If all the invoices are rebuilt afterwards, the date of today will appear on all the rebuilt invoices.
 
-## Licence
+## License
 ```
 "THE BEER-WARE LICENSE" (Revision 42):
 <pl@vqe.ch> wrote these files.    As long as you retain this notice you
