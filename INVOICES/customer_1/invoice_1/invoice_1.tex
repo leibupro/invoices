@@ -1,0 +1,19 @@
+\input{factura_preamble.tex}
+
+% extend the preamble with customer information and bill items
+\newcommand{\customer}{\input{customer.txt}}
+
+\newcommand{\billingItems}
+{
+
+\product{Gibibyte}{27}{Stk.}{4200.00}
+\product{Cosinus Hyperbolicus $[\frac{e^{x} + e^{-x}}{2}]$}{3}{Stk.}{10000.00}
+\product{Foo Bar Baz Blubb Bla Foo Bar Baz Blubb Bla Foo Bar Baz Blubb Bla Foo Bar Baz Blubb Bla}{42}{h}{250.00}
+\product{Easy $e^x$}{42}{Stk.}{1200.00}
+\product{Hooray for Boobies}{11}{Stk.}{25.90}
+\product{Vanilla Ice Ice Baby}{5}{Stk.}{17.95}
+
+}
+
+\input{factura_template.tex}
+

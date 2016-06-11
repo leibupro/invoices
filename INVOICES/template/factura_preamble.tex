@@ -1,0 +1,197 @@
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%   File:          factura_preamble.tex
+%
+%
+%   Purpose:       This file contains the preamble of
+%                  the invoice document.
+%                  All the sender information etc.,
+%                  billing table configuration,
+%                  positioning of the fields are
+%                  stored here.
+%                  These configuration parameters 
+%                  have to be individually adapted.
+%
+%
+%   Remarks:       - To develop this project
+%                    and process the tex files
+%                    the texlive-full package
+%                    was used (pdflatex). 
+%                    Maybe a smaller texlive 
+%                    package is sufficient.
+%                   
+%
+%   Author:        P. Leibundgut <leiu@zhaw.ch>
+%                                <pl@vqe.ch>
+%
+%
+%   Date:          06/2016
+%
+%
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[
+   fontsize=10pt,          % fontsize
+   paper=a4,               % page size a4
+   firsthead=on,           % display header on first page
+   firstfoot=on,           % display footer on first page
+   pagenumber=off,         % position of the page number
+   parskip=half,           % Use indent instead of skip, half, false
+   enlargefirstpage=off,   % more space on first page
+   fromalign=left,         % placement of name in letter head
+   fromrule=aftername,     % separate the address with a line in letter head, false or aftername
+   fromemail=on,           % turn on email of sender
+   fromurl=off,            % print URL of sender
+   fromphone=off,          % turn on phone of sender
+   fromlogo=off,           % turn on logo of sender
+   addrfield=right,        % address field for envelope with window, on or true
+   subject=untitled,       % placement of subject, beforeopening or titled
+   foldmarks=on,           % print foldmarks
+   numericaldate=off       % display date in numbers only
+]{scrlttr2}
+
+\usepackage[T1]{fontenc}
+\usepackage[english, ngerman]{babel}
+\usepackage{url}
+\usepackage{lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+
+\usepackage{fp}
+\usepackage{booktabs}
+\usepackage{ragged2e}
+\usepackage{longtable}
+
+\usepackage{setspace}
+\usepackage{calc}
+\usepackage{lastpage}
+\usepackage{newcent}
+\usepackage{array}
+\usepackage{hyperref}
+\hypersetup{%
+    pdfborder=0 0 0,
+    pdfauthor={},
+    pdftitle={},
+    pdfsubject={},
+    pdfkeywords={},
+    pdfpagemode={UseOutlines},
+    bookmarksopen,
+    pdfstartview={FitH},
+    colorlinks,
+    linkcolor={black},
+    citecolor={red},
+    urlcolor={black}
+  }
+
+\renewcommand\pagemark{\usekomafont{pagenumber}%
+  Seite \thepage{} von \pageref{LastPage}}
+
+\renewcaptionname{ngerman}{\enclname}{Anlagen}
+
+%\setkomafont{fromname}{\scshape \LARGE}
+\setkomafont{backaddress}{\mdseries}
+
+\setkomavar{fromname}{Der Esel}
+\setkomavar{fromaddress}{am Berg 7\\
+                         CH-3982 Bitsch
+                        }
+\setkomavar{fromemail}{edonkey2k@mindless.ch}
+\setkomavar{backaddressseparator}{ - }
+
+\setkomavar{place}{\flushleft\vspace{-\baselineskip}\hspace{90mm}Bitsch}
+\setkomavar{date}{\today\par}
+
+\setkomavar{firstfoot}{\footnotesize%
+  \rule[3pt]{\textwidth}{.4pt}\\
+  \begin{tabular}[t]{l@{}}% 
+    \hfill
+  \end{tabular}%
+  \hfill
+  \begin{tabular}[t]{l@{}}%
+    \hfill
+  \end{tabular}%
+  \hfill
+  \begin{tabular}[t]{l@{}}%
+    \pagemark
+  \end{tabular}%
+}%
+ 
+\newlength{\nextfootlinewidth}
+\setlength{\nextfootlinewidth}{170mm}
+
+\setkomavar{nextfoot}{\footnotesize%
+  \rule[3pt]{\nextfootlinewidth}{.4pt}\\
+  \begin{tabular}[t]{@{}l}% 
+    \usekomavar{fromname}\\
+    \usekomavar{fromaddress}\\
+  \end{tabular}%
+  \hfill
+  \begin{tabular}[t]{l@{}}%
+    \usekomavar{fromemail}\\
+  \end{tabular}%
+  \hfill
+  \begin{tabular}[t]{l@{}}%
+    \pagemark
+  \end{tabular}%
+}%
+
+\usepackage{scrlayer}
+\DeclareNewLayer[
+  align=tl,
+  hoffset=\dimexpr.5\paperwidth-.5\useplength{firstfootwidth}\relax,
+  voffset=\useplength{firstfootvpos},
+  width=\useplength{firstfootwidth},
+  height=\dimexpr\paperheight-\useplength{firstfootvpos},
+  foreground,
+  contents={\parbox{\layerwidth}{\usekomavar{nextfoot}}}
+]{myfoot.fg}
+\DeclarePageStyleByLayers{myletter}{myfoot.fg}
+\pagestyle{myletter} 
+
+
+\setkomavar{frombank}{\textbf{Postchekkonto: 00--00000--0}\linebreak
+                      Tightwad Bank\linebreak
+                      3982 Bitsch\linebreak
+                      \textbf{IBAN-Nr.: CH00\,0000\,0000\,0000\,0000\,0}
+                     }
+
+\setkomavar{subject}{Rechnung}
+
+\newlength{\tablewidth}
+\setlength{\tablewidth}{\textwidth + 4mm}
+
+% Briefkörper bündig am Briefkopf ausrichten
+\setlength{\oddsidemargin}{\useplength{toaddrhpos}}
+\addtolength{\oddsidemargin}{-16mm}
+\setlength{\textwidth}{\useplength{firstheadwidth}}
+
+\makeatletter
+\@setplength{firstheadvpos}{14mm}
+\@setplength{firstfootvpos}{275mm} % Abstand des Footers von oben
+\@setplength{locwidth}{70mm} % Breite des Locationfeldes
+\@setplength{locvpos}{55mm} % Abstand des Locationfeldes von oben
+\@setplength{foldmarkhpos}{6.5mm}
+
+% position of the recipient
+\@setplength{toaddrhpos}{\dimexpr\oddsidemargin+115.5mm}
+% \@setplength{toaddrvpos}{90mm}
+
+\makeatother
+
+\newcounter{cnt}
+\setcounter{cnt}{0}
+\def\inc{\stepcounter{cnt}\thecnt}
+\gdef\TotalHT{0}
+\newcommand{\product}[4]{%
+\inc  &#1 \newline  &#2  &#3  &#4  &\FPmul\temp{#2}{#4}\FPround\temp{\temp}{2}\temp 
+
+%% Totalize
+\FPadd\total{\TotalHT}{\temp}%
+\FPround\total{\total}{2}%
+\global\let\TotalHT\total%
+\\[-1ex]
+}
+\newcommand{\totalttc}{
+   \TotalHT  }
+

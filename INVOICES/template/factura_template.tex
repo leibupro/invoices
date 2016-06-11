@@ -1,0 +1,73 @@
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%   File:          factura_template.tex
+%
+%
+%   Purpose:       This file contains the template of
+%                  the invoice document.
+%                  The billing items table is a
+%                  place holder here and gets
+%                  filled in the real tex file
+%                  in a customer folder.
+%                  The real tex file will later
+%                  be processed by executing the
+%                  Makefile.
+%
+%
+%   Remarks:       - To develop this project
+%                    and process the tex files
+%                    the texlive-full package
+%                    was used (pdflatex). 
+%                    Maybe a smaller texlive 
+%                    package is sufficient.
+%                   
+%
+%   Author:        P. Leibundgut <leiu@zhaw.ch>
+%                                <pl@vqe.ch>
+%
+%
+%   Date:          06/2016
+%
+%
+%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{letter}{\vspace{-7.5mm}\customer}
+
+\opening{}
+
+\newcolumntype{C}{>{\centering\arraybackslash}p{0.1\tablewidth}}
+\newcolumntype{D}{>{\raggedright\arraybackslash}p{0.4\tablewidth}}
+\newcolumntype{A}{>{\raggedleft\arraybackslash}p{0.1\tablewidth}}
+\newcolumntype{U}{>{\raggedleft\arraybackslash}p{0.1\tablewidth}}
+\newcolumntype{P}{>{\raggedleft\arraybackslash}p{0.15\tablewidth}}
+\newcolumntype{S}{>{\raggedleft\arraybackslash}p{0.15\tablewidth}}
+
+\bgroup
+\begin{longtable}[l]{CDAUPS}
+\toprule
+Ziffer & Bezeichnung & Menge & Einheit & Preis & Betrag \\ 
+&&&& (CHF) & (CHF) \\
+\midrule
+&&&&& \\[-1.1ex]
+\endhead
+\billingItems
+\midrule
+&\textbf{Total (CHF)} & & & & \textbf{\totalttc} \\
+\bottomrule
+\end{longtable}
+\egroup
+\vspace{5mm}
+\begin{tabular}{>{\raggedright\arraybackslash}p{84mm}>{\raggedright\arraybackslash}p{68mm}}
+\textbf{Zahlungsbedingungen} & Innert 30 Tagen, ohne Abzüge \linebreak 
+                      Besondere Zahlungsbedingungen \linebreak 
+                      nach Vereinbarung \\[3ex]
+\textbf{Beilage} & Einzahlungsschein \\[3ex]
+\textbf{Zahlung} & \usekomavar{frombank}
+\end{tabular}
+
+\end{letter}
+\end{document}
+
