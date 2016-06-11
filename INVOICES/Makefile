@@ -75,12 +75,10 @@ PREAMBLE = ./template/factura_preamble.tex
 TEMPLATE = ./template/factura_template.tex
 SENDER   = ./template/sender_information.tex
 
-SUBSTITUTE  = $(PREAMBLE)
-SUBSTITUTE += $(TEMPLATE)
-SUBSTITUTE += $(SENDER)
+EXCLUDE_DIR = ./template
 
-# $(subst from,to,text)
-SRC   = $(subst $(SUBSTITUTE),,$(shell find . -name "*.tex"))
+
+SRC   = $(shell find . -name "*.tex" -not -path "$(EXCLUDE_DIR)/*")
 
 PDF   = $(SRC:.tex=.pdf)
 
@@ -103,6 +101,7 @@ all: $(PDF)
     TEXINPUTS=$(dir $(PREAMBLE)):$(firstword $(subst /, ,$<)): \
     $(TEX) -output-directory $(dir $@) $<;\
     \
+    # $(subst from,to,text) \
     rm $(subst .pdf,.aux,$@);\
     rm $(subst .pdf,.log,$@);\
     rm $(subst .pdf,.out,$@);\
