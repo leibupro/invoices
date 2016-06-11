@@ -13,6 +13,7 @@ The tree appears as follows:
                   ./INVOICES
                     |-- Makefile
                     |-- template
+                    |   |-- sender_information.tex
                     |   |-- factura_preamble.tex
                     |   +-- factura_template.tex
                     |-- customer_1
