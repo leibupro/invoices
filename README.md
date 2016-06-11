@@ -40,7 +40,7 @@ The tree appears as follows:
 * To develop this project the texlive-full package was used. Maybe a smaller texlive package is sufficient.
  
 ## Remarks 
-* Be careful by using the clean target. It removes all the invoice PDF files.If all the invoices are rebuilt afterwards, the date of today will appear on all the rebuilt invoices.
+* Be careful by using the clean target. It removes all the invoice PDF files. If all the invoices are rebuilt afterwards, the date of today will appear on all the rebuilt invoices.
 
 ## License
 ```
