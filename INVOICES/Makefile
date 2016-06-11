@@ -21,6 +21,7 @@
 #                  ./INVOICES
 #                    |-- Makefile (this file)
 #                    |-- template
+#                    |   |-- sender_information.tex
 #                    |   |-- factura_preamble.tex
 #                    |   +-- factura_template.tex
 #                    |-- customer_1
@@ -31,9 +32,9 @@
 #                    |   |-- invoice_2
 #                    |   |   |-- invoice_2.tex
 #                    |   |   +-- [invoice_2.pdf]
-#                    |   |-- invoice_n
-#                    |   |   |-- invoice_n.tex
-#                    |   |   +-- [invoice_n.pdf]
+#                    |   +-- invoice_n
+#                    |       |-- invoice_n.tex
+#                    |       +-- [invoice_n.pdf]
 #                    +-- customer_2 
 #                        |-- customer.txt
 #                        +-- invoice_1
@@ -72,9 +73,11 @@ TEX = pdflatex
 
 PREAMBLE = ./template/factura_preamble.tex
 TEMPLATE = ./template/factura_template.tex
+SENDER   = ./template/sender_information.tex
 
 SUBSTITUTE  = $(PREAMBLE)
 SUBSTITUTE += $(TEMPLATE)
+SUBSTITUTE += $(SENDER)
 
 # $(subst from,to,text)
 SRC   = $(subst $(SUBSTITUTE),,$(shell find . -name "*.tex"))
@@ -90,7 +93,7 @@ CUST  = customer.txt
 all: $(PDF)
 
 
-%.pdf: %.tex $(PREAMBLE) $(TEMPLATE)
+%.pdf: %.tex $(PREAMBLE) $(TEMPLATE) $(SENDER)
 	@if [ -f $(firstword $(subst /, ,$<))/$(CUST) ];\
   then\
     echo "$(CUST) file found.";\

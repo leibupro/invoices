@@ -4,14 +4,12 @@
 %   File:          factura_preamble.tex
 %
 %
-%   Purpose:       This file contains the preamble of
-%                  the invoice document.
-%                  All the sender information etc.,
-%                  billing table configuration,
+%   Purpose:       The billing table configuration,
 %                  positioning of the fields are
 %                  stored here.
 %                  These configuration parameters 
-%                  have to be individually adapted.
+%                  can be individually adapted
+%                  if requested.
 %
 %
 %   Remarks:       - To develop this project
@@ -84,6 +82,8 @@
     urlcolor={black}
   }
 
+\input{sender_information.tex}
+
 \renewcommand\pagemark{\usekomafont{pagenumber}%
   Seite \thepage{} von \pageref{LastPage}}
 
@@ -92,14 +92,14 @@
 %\setkomafont{fromname}{\scshape \LARGE}
 \setkomafont{backaddress}{\mdseries}
 
-\setkomavar{fromname}{Der Esel}
-\setkomavar{fromaddress}{am Berg 7\\
-                         CH-3982 Bitsch
+\setkomavar{fromname}{\sendername}
+\setkomavar{fromaddress}{\senderstreet\\
+                         \senderzip{} \senderplace
                         }
-\setkomavar{fromemail}{edonkey2k@mindless.ch}
+\setkomavar{fromemail}{\senderemail}
 \setkomavar{backaddressseparator}{ - }
 
-\setkomavar{place}{\flushleft\vspace{-\baselineskip}\hspace{90mm}Bitsch}
+\setkomavar{place}{\flushleft\vspace{-\baselineskip}\hspace{90mm}\senderplace}
 \setkomavar{date}{\today\par}
 
 \setkomavar{firstfoot}{\footnotesize%
@@ -150,10 +150,10 @@
 \pagestyle{myletter} 
 
 
-\setkomavar{frombank}{\textbf{Postchekkonto: 00--00000--0}\linebreak
-                      Tightwad Bank\linebreak
-                      3982 Bitsch\linebreak
-                      \textbf{IBAN-Nr.: CH00\,0000\,0000\,0000\,0000\,0}
+\setkomavar{frombank}{\senderbankname\linebreak
+                      \senderbankzip{} \senderbankplace\linebreak
+                      Zu Gunsten von:\linebreak
+                      \textbf{IBAN-Nr.: \senderibanno}
                      }
 
 \setkomavar{subject}{Rechnung}
